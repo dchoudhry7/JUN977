@@ -55,7 +55,7 @@ export default function HeroIntro() {
 
       {/* What we take, at a glance. Hidden on phones to keep the robot clear. */}
       <div
-        className="mt-8 hidden sm:flex flex-wrap items-center gap-2"
+        className="hero-takes mt-8 hidden sm:flex flex-wrap items-center gap-2"
         style={{ opacity: ready ? 1 : 0, transition: 'opacity 0.6s ease 0.9s' }}
       >
         <span className="mr-1 text-[12.5px] text-bone/55">We take</span>

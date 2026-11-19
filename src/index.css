@@ -103,18 +103,25 @@ body.paused *::after {
     radial-gradient(ellipse 46% 60% at 60% 40%, rgb(121 96 124 / 0.85) 0%, transparent 70%),
     radial-gradient(ellipse 80% 90% at 50% 45%, #4a3a50 0%, #2d2131 70%, #231a26 100%);
 }
-/* Footage is 1920x1080 and is never drawn wider than that. Its centre (the
-   robot) sits on --rx. On desktop it is drawn at most 1440px wide, so it is
+/* Two layouts, chosen by shape rather than width alone:
+   - stacked (phones, portrait tablets): robot on top, words right under it
+   - side by side (landscape, 768px and up): words left, robot right
+   Footage is 1920x1080 and is never drawn wider than 1440px, so it is
    downscaled (never stretched) up to a 1.33 device pixel ratio. */
+:root {
+  /* stacked: fill the width on phones, a little more on tall screens, but
+     never so big on short landscape phones that the head runs off screen */
+  --sw: min(1440px, max(210vw, 100svh), 150svh);
+  --sh: calc(var(--sw) * 9 / 16);
+  --stage-top: 44px;
+}
 .stage-media {
-  /* phones: the head (x = 990 of 1920) sits on the screen's centre line */
+  /* the head (x = 990 of 1920) sits on the screen's centre line */
+  --w: var(--sw);
+  --h: var(--sh);
   --rx: calc(50vw - var(--w) * 0.0156);
-  /* phones: a touch larger on tall screens, so the robot fills the top */
-  --w: min(1920px, max(210vw, 100svh));
-  --h: calc(var(--w) * 9 / 16);
   position: absolute;
-  /* phones: always tucked up under the nav, so there is no gap above the head */
-  top: 44px;
+  top: var(--stage-top);
   left: calc(var(--rx) - var(--w) / 2);
   width: var(--w);
   height: var(--h);
@@ -125,10 +132,11 @@ body.paused *::after {
   -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 8%, #000 58%, transparent 92%);
   mask-image: linear-gradient(to bottom, transparent 0%, #000 8%, #000 58%, transparent 92%);
 }
-@media (min-width: 768px) {
+@media (min-width: 768px) and (orientation: landscape) {
   .stage-media {
     --rx: 60vw;
     --w: min(1440px, 88vw);
+    --h: calc(var(--w) * 9 / 16);
     top: max(0px, 100vh - var(--h));
     -webkit-mask-image:
       linear-gradient(to right, transparent 0%, #000 14%, #000 88%, transparent 100%),
@@ -140,7 +148,7 @@ body.paused *::after {
     mask-composite: intersect;
   }
 }
-@media (min-width: 768px) and (max-aspect-ratio: 3/2) {
+@media (min-width: 768px) and (orientation: landscape) and (max-aspect-ratio: 3/2) {
   .stage-media {
     --rx: 62vw;
     --w: min(1440px, 96vw);
@@ -156,7 +164,7 @@ body.paused *::after {
   inset: 0;
   background: radial-gradient(ellipse 55% 60% at 0% 55%, rgb(var(--plum-rgb) / 0.8) 0%, rgb(var(--plum-rgb) / 0.35) 50%, transparent 78%);
 }
-@media (max-width: 767px) {
+@media not all and (min-width: 768px) and (orientation: landscape) {
   .stage-veil { display: none; }
 }
 .stage-dust { position: absolute; inset: 0; width: 100%; height: 100%; }
@@ -176,26 +184,46 @@ body.paused *::after {
 .stage-hud text { fill: currentColor; font-family: var(--font-body); }
 .stage-hud .stat { font-family: var(--font-heading); font-weight: 400; font-size: 38px; letter-spacing: -0.03em; }
 .stage-hud .stat-label { font-size: 19px; fill-opacity: 0.72; letter-spacing: 0; }
-@media (max-width: 767px) {
+@media not all and (min-width: 768px) and (orientation: landscape) {
   .stage-hud { display: none; }
 }
 
 /* ============================================================
-   The hero: one screen. On phones the question sits low, under the
-   robot; from tablet up it is centred on the left beside the head.
+   The hero. Stacked: the words start right where the robot fades out,
+   so there is never a gap between them, and the hero is only as tall
+   as robot plus words. Side by side: one full screen, words centred on
+   the left beside the head.
    ============================================================ */
 .hero {
   position: relative;
   z-index: 1;
-  height: 100vh;
-  height: 100svh;
-  min-height: 520px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
 }
-@media (min-width: 768px) {
-  .hero { justify-content: center; }
+.hero-intro {
+  position: relative;
+  /* the robot's lower body fades between 58% and 92% of its height; the words begin in that fade */
+  padding-top: calc(var(--stage-top) + var(--sh) * 0.66);
+  padding-bottom: 3rem;
+}
+/* Stacked: a soft plum floor under the words, so they never sit on the busy chest */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  height: calc(100% - var(--stage-top) - var(--sh) * 0.5);
+  pointer-events: none;
+  background: linear-gradient(to top, var(--color-plum-900) 0%, rgb(var(--plum-rgb) / 0.85) 55%, transparent 100%);
+}
+@media (min-width: 768px) and (orientation: landscape) {
+  .hero {
+    height: 100vh;
+    height: 100svh;
+    min-height: 520px;
+    justify-content: center;
+  }
+  .hero::before { display: none; }
+  .hero-intro { padding-top: 64px; padding-bottom: 0; }
   /* The copy stops where JUN977's inner ring begins. The ring's left edge sits
      at x = 590 of the 1920 footage, so it is --rx - 0.1927 * --w on screen
      (same numbers as .stage-media). 40px is the side padding, 28px a gap. */
@@ -204,33 +232,19 @@ body.paused *::after {
     max-width: min(36rem, calc(var(--ring-left) - 40px - 28px));
   }
 }
-@media (min-width: 768px) and (max-aspect-ratio: 3/2) {
+@media (min-width: 768px) and (orientation: landscape) and (max-aspect-ratio: 3/2) {
   .hero-intro > div { --ring-left: calc(62vw - 0.1927 * min(1440px, 96vw)); }
+}
+/* Short landscape screens (phones on their side): one screen, no chips, so the button stays in view */
+@media (min-width: 768px) and (orientation: landscape) and (max-height: 520px) {
+  .hero { min-height: 0; }
+  .hero-intro { padding-top: 56px; }
+  .hero-takes { display: none; }
 }
 .hero-intro { text-shadow: var(--tshadow); }
 .hero-intro .display { text-shadow: var(--tshadow); }
 .hero-intro .pill,
 .hero-intro button { text-shadow: none; }
-/* Phones: a soft plum floor under the question, so it never sits on the busy chest */
-@media (max-width: 767px) {
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: auto 0 0 0;
-    height: 42%;
-    pointer-events: none;
-    background: linear-gradient(to top, var(--color-plum-900) 0%, rgb(var(--plum-rgb) / 0.85) 45%, transparent 100%);
-  }
-  .hero-intro { position: relative; }
-}
-
-/* Static hero (reduced motion, data saver) */
-.hero.is-static .hero-intro {
-  padding-bottom: 3rem;
-  padding-top: 40vh;
-  /* a soft plum floor under the copy, so it never sits on the robot's busy chest */
-  background: linear-gradient(to top, var(--color-plum-900) 0%, rgb(var(--plum-rgb) / 0.92) 38%, transparent 62%);
-}
 
 /* Footer wordmark: one letter at a time turns orange and lifts a little */
 .wordmark { --display: var(--color-plum-800); }
