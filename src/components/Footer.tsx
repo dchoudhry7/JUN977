@@ -61,7 +61,7 @@ export default function Footer() {
             </ul>
           </nav>
           <ul className="space-y-1">
-            {['Instagram', 'LinkedIn', 'Are.na'].map((s) => (
+            {['Instagram', 'LinkedIn'].map((s) => (
               <li key={s}>
                 <a href="#" className="text-bone/80 hover:text-rust transition-colors">
                   {s}
