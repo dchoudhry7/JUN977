@@ -23,7 +23,7 @@ export default function Labs() {
       {/* JUN977 on the left, the booking console on the right: one screen, plain plum */}
       <div className="grid gap-16 lg:grid-cols-2 lg:gap-12 items-start px-5 sm:px-8 md:px-10 pt-24 sm:pt-32 pb-16">
         <div>
-          <ScrambleText as="h2" id="book-title" text="Meet JUN977" className="display block" style={{ fontSize: 'clamp(38px, 4.4vw, 84px)' }} />
+          <ScrambleText as="h2" id="book-title" text="Meet JUN977" className="display block" style={{ fontSize: 'clamp(32px, 3.4vw, 64px)' }} />
           <p className="mt-5 max-w-[40ch] text-[15px] sm:text-[16px] leading-[1.7] text-bone/75">
             Our robot is built entirely from things people gave us. Now it books every pickup: tell it what you have,
             and it tells you what happens next.
@@ -49,7 +49,7 @@ export default function Labs() {
           </div>
         </div>
 
-        <div className="lg:pt-6 flex lg:justify-end">
+        <div className="flex lg:justify-end">
           <Pitch />
         </div>
       </div>

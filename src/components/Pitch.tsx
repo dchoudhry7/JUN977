@@ -100,7 +100,7 @@ export default function Pitch() {
 
   return (
     <div ref={sectionRef} id="pitch" aria-labelledby="pitch-title" role="region" className="relative w-full max-w-[580px] scroll-mt-28">
-        <ScrambleText as="h3" id="pitch-title" text="Book a pickup" className="display block mb-6" style={{ fontSize: 'clamp(26px, 2.4vw, 42px)' }} />
+        <ScrambleText as="h3" id="pitch-title" text="Book a pickup" className="display block mb-6" style={{ fontSize: 'clamp(32px, 3.4vw, 64px)' }} />
 
         {/* The booking console: rust casing, plum screen, input on the ledge */}
         <div className="relative rounded-[24px] bg-rust p-3 sm:p-4 shadow-[0_50px_90px_-40px_rgba(0,0,0,0.8)]">
