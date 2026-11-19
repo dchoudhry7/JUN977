@@ -103,11 +103,9 @@ export default function Pitch() {
       ref={sectionRef}
       id="pitch"
       aria-labelledby="pitch-title"
-      className="relative min-h-screen flex items-center px-5 sm:px-8 md:px-10 py-28"
+      className="relative min-h-screen flex items-center justify-center bg-plum-900 px-5 sm:px-8 md:px-10 py-28"
       style={{ zIndex: 1 }}
     >
-      <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-plum-950/85 via-plum-950/40 to-transparent" />
-
       <div className="relative w-full max-w-[580px]">
         <ScrambleText as="h2" id="pitch-title" text="Pitch us an idea" className="display block mb-6" style={{ fontSize: 'clamp(30px, 3.2vw, 58px)' }} />
 

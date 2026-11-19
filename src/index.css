@@ -91,7 +91,7 @@ body.paused *::after {
 
 
 /* ============================================================
-   The stage: fixed footage behind the hero and the pitch
+   The stage: fixed footage behind the hero
    ============================================================ */
 .stage {
   position: fixed;

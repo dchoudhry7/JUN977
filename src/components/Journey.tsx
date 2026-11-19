@@ -231,7 +231,7 @@ export default function Journey() {
     sizeCanvas()
     window.addEventListener('resize', sizeCanvas)
 
-    // The stage is only seen behind the hero and behind the pitch section.
+    // The stage is only seen behind the hero.
     const seen = new Set<Element>()
     const stageIo = new IntersectionObserver((entries) => {
       entries.forEach((e) => (e.isIntersecting ? seen.add(e.target) : seen.delete(e.target)))
@@ -239,8 +239,6 @@ export default function Journey() {
       startDust()
     })
     stageIo.observe(hero)
-    const pitch = document.getElementById('pitch')
-    if (pitch) stageIo.observe(pitch)
 
     const onVis = () => {
       document.body.classList.toggle('paused', document.hidden)

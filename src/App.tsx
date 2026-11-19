@@ -31,10 +31,7 @@ export default function App() {
           <Work />
           <Process />
           <Labs />
-        </div>
-        {/* The footage shows through again behind the pitch console */}
-        <Pitch />
-        <div className="relative" style={{ zIndex: 1 }}>
+          <Pitch />
           <Openings />
           <Shop />
         </div>
