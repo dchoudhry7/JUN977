@@ -18,7 +18,7 @@ const ROUTES: Route[] = [
   {
     test: /\b(tv|tvs|television|monitors?|screens?|display)\b/i,
     team: 'Large items',
-    reply: 'A screen. Two of us will come and carry it down. Big screens are €15, paid at the door. Everything else on your list is free.',
+    reply: 'A screen. Two of us will come and carry it down. Big screens are ₹299, paid at the door. Everything else on your list is free.',
   },
   {
     test: /\b(phones?|iphone|android|laptops?|macbook|computers?|pc|desktop|tablets?|ipad|hard ?drives?|drives?|ssd)\b/i,
@@ -88,7 +88,7 @@ export default function Pitch() {
   }
 
   const mailto = `mailto:${EMAIL}?subject=${encodeURIComponent('Pickup request')}&body=${encodeURIComponent(
-    `What to pick up: ${submitted}\n\nAddress and postcode:\nBest day and time:\n\n(Sorted by JUN977: ${route?.team ?? ''})`,
+    `What to pick up: ${submitted}\n\nAddress and PIN code:\nBest day and time:\n\n(Sorted by JUN977: ${route?.team ?? ''})`,
   )}`
 
   const mood =

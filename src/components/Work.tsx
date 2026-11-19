@@ -10,7 +10,7 @@ const PROJECTS: Project[] = [
   { name: 'Cables and chargers', scope: 'The whole drawer, tangled', sector: 'Copper recovered', year: 'Free', code: 'CB', line: 'Bring the knot. Untangling it is our job.' },
   { name: 'Audio and gaming', scope: 'Speakers, consoles, headphones', sector: 'Repaired or parted', year: 'Free', code: 'AV', line: 'Consoles that still boot go to the refurbished shelf.' },
   { name: 'Batteries and power banks', scope: 'Terminals taped, in a bag', sector: 'Certified recycler', year: 'Free', code: 'BT', line: 'Tape the ends, bag them up, and leave the rest to us.' },
-  { name: 'TVs and monitors', scope: 'Up to 65 inches', sector: 'Panels recycled', year: '€15', code: 'TV', line: 'Two of us carry it down. You hold the door.' },
+  { name: 'TVs and monitors', scope: 'Up to 65 inches', sector: 'Panels recycled', year: '₹299', code: 'TV', line: 'Two of us carry it down. You hold the door.' },
 ]
 
 export default function Work() {

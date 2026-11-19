@@ -107,7 +107,8 @@ body.paused *::after {
    robot) sits on --rx. On desktop it is drawn at most 1440px wide, so it is
    downscaled (never stretched) up to a 1.33 device pixel ratio. */
 .stage-media {
-  --rx: 50vw;
+  /* phones: the head (x = 990 of 1920) sits on the screen's centre line */
+  --rx: calc(50vw - var(--w) * 0.0156);
   --w: min(1920px, 210vw);
   --h: calc(var(--w) * 9 / 16);
   position: absolute;
@@ -120,8 +121,8 @@ body.paused *::after {
   object-fit: cover;
   transform: translateZ(0);
   will-change: transform, opacity;
-  -webkit-mask-image: linear-gradient(to bottom, #000 58%, transparent 92%);
-  mask-image: linear-gradient(to bottom, #000 58%, transparent 92%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 58%, transparent 92%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 58%, transparent 92%);
 }
 @media (min-width: 768px) {
   .stage-media {

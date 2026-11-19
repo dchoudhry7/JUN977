@@ -62,9 +62,9 @@ function LaptopArt() {
 
 /* Everything here came in through a pickup */
 const ITEMS = [
-  { name: 'Refurbished phone', detail: '128 GB, new battery, one-year warranty', price: '€149', Art: PhoneArt },
-  { name: 'Refurbished laptop', detail: '14 inch, 16 GB, new battery, one-year warranty', price: '€329', Art: LaptopArt },
-  { name: 'JUN977 desk figure', detail: 'Cast from recycled aluminium, 14 cm', price: '€48', Art: FigureArt },
+  { name: 'Refurbished phone', detail: '128 GB, new battery, one-year warranty', price: '₹12,999', Art: PhoneArt },
+  { name: 'Refurbished laptop', detail: '14 inch, 16 GB, new battery, one-year warranty', price: '₹29,999', Art: LaptopArt },
+  { name: 'JUN977 desk figure', detail: 'Cast from recycled aluminium, 14 cm', price: '₹1,499', Art: FigureArt },
 ]
 
 export default function Shop() {

@@ -6,8 +6,8 @@ import { NAV_LINKS } from './Navbar'
 import ScrambleText from './ScrambleText'
 
 const STUDIOS = [
-  { city: 'Rotterdam', hours: 'Pickups Mon to Sat, 8 to 8' },
-  { city: 'Lisbon', hours: 'Pickups Mon to Sat, 9 to 7' },
+  { city: 'Delhi', hours: 'Pickups Mon to Sat, 8 to 8' },
+  { city: 'Bombay', hours: 'Pickups Mon to Sat, 9 to 7' },
 ]
 
 export default function Footer() {
@@ -84,7 +84,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-8 flex flex-wrap justify-between gap-4 font-mono text-[12px] text-bone/45">
-          <span>© 2026 JUNK Recycling B.V.</span>
+          <span>© 2026 JUNK Recycling Pvt. Ltd.</span>
           <span>JUN977 turns when you do.</span>
         </div>
       </div>

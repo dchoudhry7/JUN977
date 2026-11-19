@@ -5,7 +5,7 @@ import ScrambleText from './ScrambleText'
 const FAQ = [
   {
     q: 'What does it cost?',
-    a: 'Home pickups of phones, laptops, cables and other small electronics are free. TVs and monitors over 32 inches are €15, because two people carry them. Businesses get a quote within a day.',
+    a: 'Home pickups of phones, laptops, cables and other small electronics are free. TVs and monitors over 32 inches are ₹299, because two people carry them. Businesses get a quote within a day.',
   },
   {
     q: 'Is my data safe?',
@@ -13,7 +13,7 @@ const FAQ = [
   },
   {
     q: 'Where do you pick up?',
-    a: 'Anywhere in Rotterdam and Lisbon, and the towns around them. Not sure about yours? Put your postcode in the booking email and we will tell you within a day.',
+    a: 'Anywhere in Delhi and Bombay, and the towns around them. Not sure about yours? Put your PIN code in the booking email and we will tell you within a day.',
   },
   {
     q: 'Do you take broken things?',

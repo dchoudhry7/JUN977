@@ -1,6 +1,6 @@
 # JUNK
 
-A one-page site for JUNK, an e-waste pickup service in Rotterdam and Lisbon, fronted by its robot JUN977.
+A one-page site for JUNK, an e-waste pickup service in Delhi and Bombay, fronted by its robot JUN977.
 
 The hero is a single screen over a fixed video of JUN977: moving the mouse (or dragging a finger) left and right turns its head. Below that: what we take, how a pickup works, a booking console where JUN977 reads your list (press and hold to book), FAQ, refurbished devices and contact.
 
