@@ -109,11 +109,12 @@ body.paused *::after {
 .stage-media {
   /* phones: the head (x = 990 of 1920) sits on the screen's centre line */
   --rx: calc(50vw - var(--w) * 0.0156);
-  --w: min(1920px, 210vw);
+  /* phones: a touch larger on tall screens, so the robot fills the top */
+  --w: min(1920px, max(210vw, 100svh));
   --h: calc(var(--w) * 9 / 16);
   position: absolute;
-  /* phones: the robot sits just above the question, not up under the nav */
-  top: max(56px, 78svh - var(--h));
+  /* phones: always tucked up under the nav, so there is no gap above the head */
+  top: 44px;
   left: calc(var(--rx) - var(--w) / 2);
   width: var(--w);
   height: var(--h);
@@ -121,8 +122,8 @@ body.paused *::after {
   object-fit: cover;
   transform: translateZ(0);
   will-change: transform, opacity;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 58%, transparent 92%);
-  mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 58%, transparent 92%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 8%, #000 58%, transparent 92%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 8%, #000 58%, transparent 92%);
 }
 @media (min-width: 768px) {
   .stage-media {
