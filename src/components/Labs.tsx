@@ -4,7 +4,7 @@ import ScrambleText from './ScrambleText'
 
 const SPEC = [
   ['Unit', 'JUN977'],
-  ['On duty since', 'June 2019'],
+  ['On duty since', 'June 2026'],
   ['Made from', '1 intercom, 2 bike lights, 1 mattress spring'],
   ['Eyes', '2 × 64 amber LEDs'],
   ['Reads', 'every pitch, in under a minute'],

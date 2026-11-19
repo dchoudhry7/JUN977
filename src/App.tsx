@@ -22,7 +22,7 @@ export default function App() {
       </a>
       <Navbar />
       <main id="main" tabIndex={-1} className="relative outline-none">
-        {/* The pinned journey over the fixed footage */}
+        {/* The hero over the fixed footage */}
         <Journey />
         {/* Solid sections slide over the footage */}
         <div className="relative" style={{ zIndex: 1 }}>
