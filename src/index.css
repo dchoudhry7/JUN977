@@ -204,6 +204,16 @@ body.paused *::after {
   background: linear-gradient(to top, var(--color-plum-900) 0%, rgb(var(--plum-rgb) / 0.92) 38%, transparent 62%);
 }
 
+/* Footer wordmark: one letter at a time turns orange and lifts a little */
+.wordmark { --display: var(--color-plum-800); }
+.wordmark > span {
+  display: inline-block;
+  transition: color 0.35s ease, transform 0.5s var(--ease-out-soft);
+}
+@media (hover: hover) {
+  .wordmark > span:hover { color: var(--color-rust); transform: translateY(-0.06em); }
+}
+
 /* ============================================================
    Misc motion primitives
    ============================================================ */

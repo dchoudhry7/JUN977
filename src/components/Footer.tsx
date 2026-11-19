@@ -71,10 +71,12 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* The wordmark, large and quiet: no effects, just the name */}
+        {/* The wordmark, large and quiet. Each letter warms to orange under the pointer. */}
         <div aria-hidden="true" className="mt-16 sm:mt-24 flex items-end justify-between select-none">
-          <span className="display" style={{ ...mark, color: 'var(--color-plum-800)' }}>
-            JUNK
+          <span className="display wordmark" style={mark}>
+            {'JUNK'.split('').map((c, i) => (
+              <span key={i}>{c}</span>
+            ))}
           </span>
           <span className="spin-slow inline-block text-rust mb-[2vw]" style={{ fontSize: 'clamp(28px, 5vw, 90px)' }}>
             ✳︎
