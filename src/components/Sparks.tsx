@@ -55,7 +55,8 @@ export default function Sparks() {
     }
 
     const burst = (e: PointerEvent) => {
-      if (reduce.matches || e.button !== 0) return
+      // Mouse and pen only: on touch screens a drag steers JUN977 instead
+      if (reduce.matches || e.button !== 0 || e.pointerType === 'touch') return
       const n = 16 + Math.floor(Math.random() * 10)
       for (let i = 0; i < n; i++) {
         const a = -Math.PI / 2 + (Math.random() - 0.5) * Math.PI * 1.5

@@ -111,7 +111,8 @@ body.paused *::after {
   --w: min(1920px, 210vw);
   --h: calc(var(--w) * 9 / 16);
   position: absolute;
-  top: 56px;
+  /* phones: the robot sits just above the question, not up under the nav */
+  top: max(56px, 78svh - var(--h));
   left: calc(var(--rx) - var(--w) / 2);
   width: var(--w);
   height: var(--h);
@@ -151,7 +152,7 @@ body.paused *::after {
 .stage-veil {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 55% 50% at 0% 100%, rgb(var(--plum-rgb) / 0.8) 0%, rgb(var(--plum-rgb) / 0.35) 50%, transparent 78%);
+  background: radial-gradient(ellipse 55% 60% at 0% 55%, rgb(var(--plum-rgb) / 0.8) 0%, rgb(var(--plum-rgb) / 0.35) 50%, transparent 78%);
 }
 @media (max-width: 767px) {
   .stage-veil { display: none; }
@@ -178,25 +179,40 @@ body.paused *::after {
 }
 
 /* ============================================================
-   The hero: one screen. The greeting sits low on the left while
-   JUN977 follows the pointer. No pinned scroll.
+   The hero: one screen. On phones the question sits low, under the
+   robot; from tablet up it is centred on the left beside the head.
    ============================================================ */
 .hero {
   position: relative;
   z-index: 1;
   height: 100vh;
   height: 100svh;
-  min-height: 560px;
+  min-height: 520px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+}
+@media (min-width: 768px) {
+  .hero { justify-content: center; }
 }
 .hero-intro { text-shadow: var(--tshadow); }
 .hero-intro .display { text-shadow: var(--tshadow); }
 .hero-intro .pill,
 .hero-intro button { text-shadow: none; }
+/* Phones: a soft plum floor under the question, so it never sits on the busy chest */
+@media (max-width: 767px) {
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 42%;
+    pointer-events: none;
+    background: linear-gradient(to top, var(--color-plum-900) 0%, rgb(var(--plum-rgb) / 0.85) 45%, transparent 100%);
+  }
+  .hero-intro { position: relative; }
+}
 
-/* Static hero (phones, portrait tablets, reduced motion) */
+/* Static hero (reduced motion, data saver) */
 .hero.is-static .hero-intro {
   padding-bottom: 3rem;
   padding-top: 40vh;

@@ -3,7 +3,8 @@ import HeroIntro from './Hero'
 
 /* ------------------------------------------------------------------
    The footage: JUN977 turns its head from looking left (t = 0) to
-   looking right (t = 1). The pointer's horizontal position steers it.
+   looking right (t = 1). The pointer's horizontal position steers it;
+   on touch screens, dragging a finger across the page does the same.
    ------------------------------------------------------------------ */
 const VIDEO = '/media/jun977.mp4'
 const POSTER = '/media/jun977-poster.jpg'
@@ -11,14 +12,9 @@ const FPS = 24
 const START = 0.4 // looking at the visitor, matches the poster
 const EASE = 0.3 // share of the remaining distance per 60fps frame
 
-/* The five static-hero gates. Must match the CSS intent exactly (10k rule). */
-const GATES = [
-  '(max-width: 720px)',
-  '(orientation: portrait) and (max-width: 1024px)',
-  '(orientation: portrait) and (pointer: coarse)',
-  '(orientation: landscape) and (pointer: coarse) and (max-height: 560px)',
-  '(prefers-reduced-motion: reduce)',
-]
+/* Static hero (stills, no video): only for reduced motion or data saver */
+const GATES = ['(prefers-reduced-motion: reduce)']
+const saveData = () => Boolean((navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData)
 
 /* Specs around the head, in the footage's 1920x1080 coordinates */
 const STATS = [
@@ -112,7 +108,8 @@ export default function Journey() {
     const loadVideoOnce = async () => {
       if (loadStarted) return
       loadStarted = true
-      video.poster = POSTER // set here, inside the gated path, so phones never fetch it
+      video.poster = POSTER // set here, inside the gated path, so static mode never fetches it
+      video.classList.add('is-ready') // the poster shows while the footage downloads
       try {
         const res = await fetch(VIDEO)
         if (!res.ok) throw new Error(String(res.status))
@@ -123,34 +120,50 @@ export default function Journey() {
       } catch {
         video.src = VIDEO
       }
+      const onData = () => {
+        if (ready) return
+        ready = true
+        shown = target
+        seekToFrame(Math.round(shown * (frameCount() - 1)))
+      }
+      video.addEventListener('loadeddata', onData, { once: true })
+      video.addEventListener('canplay', onData, { once: true })
+      // iOS Safari will not decode a frame until the video has played once
       video.addEventListener(
-        'loadeddata',
+        'loadedmetadata',
         () => {
-          ready = true
-          shown = target
-          seekToFrame(Math.round(shown * (frameCount() - 1)))
-          video.classList.add('is-ready')
+          if (video.readyState < 2) video.play().then(() => video.pause()).catch(() => {})
         },
         { once: true },
       )
+      video.load()
     }
 
     /* ---------- pointer: left edge looks left, right edge looks right ---------- */
     let mouseT = START
-    const onPointer = (e: PointerEvent) => {
-      if (e.pointerType !== 'mouse' && e.pointerType !== 'pen') return
-      mouseT = clamp(e.clientX / window.innerWidth, 0, 1)
+    const steer = (x: number) => {
+      mouseT = clamp(x / window.innerWidth, 0, 1)
       target = mouseT
       kickSeek()
+    }
+    const onPointer = (e: PointerEvent) => {
+      if (e.pointerType === 'mouse' || e.pointerType === 'pen') steer(e.clientX)
+    }
+    // Touch: passive listeners, so the page still scrolls while the finger steers
+    const onTouch = (e: TouchEvent) => {
+      const t = e.touches[0]
+      if (t) steer(t.clientX)
     }
 
     /* ---------- static mode (phones, portrait tablets, reduced motion) ---------- */
     let scrubOn: boolean | null = null
     const applyMode = () => {
-      const isStatic = GATES.some((q) => window.matchMedia(q).matches)
+      const isStatic = saveData() || GATES.some((q) => window.matchMedia(q).matches)
       if (isStatic && scrubOn !== false) {
         scrubOn = false
         window.removeEventListener('pointermove', onPointer)
+        window.removeEventListener('touchstart', onTouch)
+        window.removeEventListener('touchmove', onTouch)
         if (seekRaf !== null) cancelAnimationFrame(seekRaf)
         seekRaf = null
         video.classList.remove('is-ready')
@@ -163,6 +176,8 @@ export default function Journey() {
         loadVideoOnce()
         if (ready) video.classList.add('is-ready')
         window.addEventListener('pointermove', onPointer, { passive: true })
+        window.addEventListener('touchstart', onTouch, { passive: true })
+        window.addEventListener('touchmove', onTouch, { passive: true })
       }
     }
     const mqls = GATES.map((q) => window.matchMedia(q))
@@ -251,6 +266,8 @@ export default function Journey() {
       cancelled = true
       mqls.forEach((m) => m.removeEventListener('change', applyMode))
       window.removeEventListener('pointermove', onPointer)
+      window.removeEventListener('touchstart', onTouch)
+      window.removeEventListener('touchmove', onTouch)
       window.removeEventListener('resize', sizeCanvas)
       document.removeEventListener('visibilitychange', onVis)
       reduce.removeEventListener('change', startDust)
@@ -317,9 +334,9 @@ export default function Journey() {
         <canvas ref={dustRef} className="stage-dust" />
       </div>
 
-      {/* One screen: the greeting on the left, JUN977 following the pointer */}
+      {/* One screen: the question on the left, JUN977 following the pointer or finger */}
       <section ref={heroRef} id="top" className="hero" aria-label="Meet JUN977">
-        <div className="hero-intro px-5 sm:px-8 md:px-10 pb-12 md:pb-[9vh]">
+        <div className="hero-intro px-5 sm:px-8 md:px-10 pb-12 md:pb-0">
           <HeroIntro />
         </div>
       </section>
