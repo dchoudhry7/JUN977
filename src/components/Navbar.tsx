@@ -2,9 +2,9 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 
 /* In the order the sections appear on the page */
 export const NAV_LINKS = [
-  { label: 'Studio', href: '#studio' },
-  { label: 'Labs', href: '#labs' },
-  { label: 'Openings', href: '#openings' },
+  { label: 'What we take', href: '#take' },
+  { label: 'How it works', href: '#process' },
+  { label: 'FAQ', href: '#faq' },
   { label: 'Shop', href: '#shop' },
 ]
 
@@ -123,11 +123,11 @@ export default function Navbar() {
 
         <div className="justify-self-end flex items-center">
           <a
-            href="#contact"
+            href="#pitch"
             className="hidden md:inline-flex items-center gap-2 rounded-[4px] border border-rust px-4 py-2.5 text-[13px] lg:text-[14px] font-semibold text-bone hover:bg-rust hover:text-plum-950 transition-colors duration-200"
           >
             <span aria-hidden="true" className="size-1.5 rounded-full bg-glow shadow-[0_0_8px_rgba(255,200,97,0.9)]" />
-            Get in touch
+            Book a pickup
           </a>
 
           <button
@@ -163,11 +163,11 @@ export default function Navbar() {
           </a>
         ))}
         <a
-          href="#contact"
+          href="#pitch"
           onClick={() => setOpen(false)}
           className="mt-4 inline-flex items-center rounded-[4px] bg-rust px-5 py-3 text-[15px] font-semibold text-plum-950"
         >
-          Get in touch
+          Book a pickup
         </a>
       </div>
     </>

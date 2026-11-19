@@ -6,8 +6,8 @@ import { NAV_LINKS } from './Navbar'
 import ScrambleText from './ScrambleText'
 
 const STUDIOS = [
-  { city: 'Rotterdam', hours: 'Mon to Thu, 9 to 6' },
-  { city: 'Lisbon', hours: 'Mon to Thu, 10 to 7' },
+  { city: 'Rotterdam', hours: 'Pickups Mon to Sat, 8 to 8' },
+  { city: 'Lisbon', hours: 'Pickups Mon to Sat, 9 to 7' },
 ]
 
 export default function Footer() {
@@ -19,9 +19,9 @@ export default function Footer() {
     <footer id="contact" className="relative bg-plum-950 text-bone overflow-hidden" style={{ zIndex: 1 }}>
       <div aria-hidden="true" className="hazard h-3 sm:h-4" />
       <div className="px-5 sm:px-8 md:px-10 pt-24 sm:pt-32 pb-8">
-        <ScrambleText as="h2" text="Send a brief hello." className="display block max-w-[14em]" style={{ fontSize: 'clamp(32px, 3.8vw, 68px)' }} />
+        <ScrambleText as="h2" text="Got a drawer full?" className="display block max-w-[14em]" style={{ fontSize: 'clamp(32px, 3.8vw, 68px)' }} />
         <p className="mt-6 max-w-[40ch] text-[15px] sm:text-[16px] leading-[1.7] text-bone/65">
-          A person reads this inbox. JUN977 only sorts it. You will hear back within two working days.
+          Book with JUN977 above, or email us your list. A person reads this inbox and confirms a slot within one working day.
         </p>
 
         <div className="mt-10 flex flex-wrap items-center gap-3">
@@ -84,7 +84,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-8 flex flex-wrap justify-between gap-4 font-mono text-[12px] text-bone/45">
-          <span>© 2026 JUNK Studio B.V.</span>
+          <span>© 2026 JUNK Recycling B.V.</span>
           <span>JUN977 turns when you do.</span>
         </div>
       </div>

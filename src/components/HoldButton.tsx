@@ -3,11 +3,23 @@ import { useEffect, useRef, useState, type CSSProperties } from 'react'
 const HOLD_MS = 850
 
 /**
- * Press and hold to weld. Progress builds while held, eases back if released
+ * Press and hold to confirm. Progress builds while held, eases back if released
  * early, and fires `onDone` when the seam closes. Keyboard (Enter or Space) and
  * reduced motion skip the hold and fire at once.
  */
-export default function HoldButton({ onDone, disabled, label = 'Hold to weld' }: { onDone: () => void; disabled?: boolean; label?: string }) {
+export default function HoldButton({
+  onDone,
+  disabled,
+  label = 'Hold to book',
+  busy = 'Booking…',
+  done = 'Booked',
+}: {
+  onDone: () => void
+  disabled?: boolean
+  label?: string
+  busy?: string
+  done?: string
+}) {
   const [p, setP] = useState(0)
   const holding = useRef(false)
   const raf = useRef<number | null>(null)
@@ -91,7 +103,7 @@ export default function HoldButton({ onDone, disabled, label = 'Hold to weld' }:
         }}
       />
       <span className="relative" style={{ color: p > 0.45 ? 'var(--color-plum-950)' : undefined }}>
-        {p > 0 ? (p >= 1 ? 'Welded' : 'Welding…') : label}
+        {p > 0 ? (p >= 1 ? done : busy) : label}
       </span>
     </button>
   )

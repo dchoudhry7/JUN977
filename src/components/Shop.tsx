@@ -32,53 +32,39 @@ function FigureArt() {
   )
 }
 
-function NotebookArt() {
-  const lines = Array.from({ length: 9 }, (_, i) => i)
+function PhoneArt() {
   return (
-    <svg viewBox="0 0 140 190" className="h-full w-auto" aria-hidden="true">
-      <rect x="6" y="4" width="128" height="182" rx="6" fill="#1c141f" />
-      <rect x="16" y="4" width="118" height="182" rx="4" fill="#efe6dc" />
-      <g stroke="#d3c9ca" strokeWidth="1">
-        {lines.map((i) => (
-          <line key={`h${i}`} x1="16" x2="134" y1={24 + i * 18} y2={24 + i * 18} />
-        ))}
-        {lines.slice(0, 6).map((i) => (
-          <line key={`v${i}`} y1="4" y2="186" x1={32 + i * 18} x2={32 + i * 18} />
-        ))}
-      </g>
-      <rect x="112" y="4" width="7" height="182" fill="#2a1f2e" />
-      <text x="28" y="172" fontSize="13" fill="#1c141f" fontFamily="var(--font-body)" fontWeight="700">
-        JUNK®
-      </text>
+    <svg viewBox="0 0 110 200" className="h-full w-auto" aria-hidden="true">
+      <rect x="6" y="4" width="98" height="192" rx="16" fill="#1c141f" />
+      <rect x="13" y="16" width="84" height="164" rx="8" fill="#3a2c40" />
+      <rect x="40" y="9" width="30" height="4" rx="2" fill="#5d4b60" />
+      {/* the robot's eyes on the lock screen */}
+      <circle cx="40" cy="86" r="10" fill="#ffc861" />
+      <circle cx="70" cy="86" r="10" fill="#ffc861" />
+      <rect x="28" y="140" width="54" height="6" rx="3" fill="#8a7290" />
+      <rect x="36" y="152" width="38" height="5" rx="2.5" fill="#5d4b60" />
     </svg>
   )
 }
 
-function ToteArt() {
+function LaptopArt() {
   return (
-    <svg viewBox="0 0 160 200" className="h-full w-auto" aria-hidden="true">
-      <path d="M52 70V46a28 28 0 0 1 56 0v24" fill="none" stroke="#2a1f2e" strokeWidth="7" />
-      <path d="M22 68h116l-8 132H30z" fill="#efe6dc" />
-      <path d="M22 68h116l-1 10H23z" fill="#d8cdc0" />
-      <g clipPath="url(#tote-clip)">
-        <path d="M40 176 70 146M58 182l36-36M78 186l38-38" stroke="#e2701f" strokeWidth="9" />
-      </g>
-      <defs>
-        <clipPath id="tote-clip">
-          <rect x="40" y="146" width="80" height="34" />
-        </clipPath>
-      </defs>
-      <text x="80" y="128" fontSize="30" textAnchor="middle" fill="#1c141f" fontFamily="var(--font-heading)">
-        JUNK
-      </text>
+    <svg viewBox="0 0 220 150" className="h-full w-auto" aria-hidden="true">
+      <rect x="30" y="6" width="160" height="110" rx="8" fill="#1c141f" />
+      <rect x="38" y="14" width="144" height="94" rx="3" fill="#3a2c40" />
+      <path d="M58 40h40M58 52h70M58 64h54M58 76h62" stroke="#8a7290" strokeWidth="5" strokeLinecap="round" />
+      <path d="M150 34l14 8-14 8z" fill="#ffc861" />
+      <path d="M6 120h208l-10 22H16z" fill="#8d8a92" stroke="#1c141f" strokeWidth="3" />
+      <rect x="92" y="122" width="36" height="5" rx="2.5" fill="#1c141f" />
     </svg>
   )
 }
 
+/* Everything here came in through a pickup */
 const ITEMS = [
-  { name: 'JUN977 desk figure', detail: 'Painted resin, 14 cm, antennae bend', price: '€48', Art: FigureArt },
-  { name: 'Grid notebook', detail: '120 pages, lay-flat binding', price: '€18', Art: NotebookArt },
-  { name: 'Studio tote', detail: 'Heavy unbleached canvas', price: '€32', Art: ToteArt },
+  { name: 'Refurbished phone', detail: '128 GB, new battery, one-year warranty', price: '€149', Art: PhoneArt },
+  { name: 'Refurbished laptop', detail: '14 inch, 16 GB, new battery, one-year warranty', price: '€329', Art: LaptopArt },
+  { name: 'JUN977 desk figure', detail: 'Cast from recycled aluminium, 14 cm', price: '€48', Art: FigureArt },
 ]
 
 export default function Shop() {
@@ -86,13 +72,13 @@ export default function Shop() {
     <section id="shop" aria-labelledby="shop-title" className="relative bg-rust text-plum-950 px-5 sm:px-8 md:px-10 py-24 sm:py-32">
       <div className="flex flex-wrap items-end justify-between gap-6">
         <div>
-          <ScrambleText as="h2" id="shop-title" text="Shop" className="display block display--ink" style={{ fontSize: 'clamp(44px, 5.5vw, 104px)' }} />
+          <ScrambleText as="h2" id="shop-title" text="Refurbished" className="display block display--ink" style={{ fontSize: 'clamp(38px, 4.6vw, 88px)' }} />
           <p className="mt-5 max-w-[38ch] text-[15px] sm:text-[16px] leading-[1.7] text-plum-950/85">
-            Things we made for ourselves and kept getting asked about. Small batches, posted from Rotterdam.
+            Tested, cleaned and fitted with a new battery. Every one came in through a pickup, and each has a one-year warranty.
           </p>
         </div>
         <a
-          href={`mailto:shop@junk.studio?subject=${encodeURIComponent('Order')}`}
+          href={`mailto:shop@junk.eco?subject=${encodeURIComponent('Order')}`}
           className="font-heading font-normal tracking-[-0.03em] text-[22px] text-plum-950 underline underline-offset-4 hover:text-bone transition-colors"
         >
           Order by email

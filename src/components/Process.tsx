@@ -3,10 +3,10 @@ import { useScrollVar } from '../hooks/useScrollVar'
 import ScrambleText from './ScrambleText'
 
 const STEPS = [
-  { title: 'Scavenge', weeks: 'Weeks 1 to 2', body: 'Two weeks of questions. We talk to your customers, your staff and your competitors’ customers, and list everything you already own that still works.' },
-  { title: 'Sort', weeks: 'Weeks 3 to 5', body: 'Three directions, each shown as real things: a homepage, a box, a sign on a door. You pick one. Nobody pitches a mood board.' },
-  { title: 'Weld', weeks: 'Weeks 6 to 14', body: 'Designers and engineers at one table. What we show you on Friday is something you can click, hold or print on Monday.' },
-  { title: 'Keep it running', weeks: 'Six months after launch', body: 'Launch is when the real feedback arrives, so the same team stays on for half a year to fix, tune and answer the phone.' },
+  { title: 'Book', weeks: 'Takes a minute', body: 'Tell JUN977 what you have and pick a two-hour slot. No account, no app, no sorting things yourself.' },
+  { title: 'Pickup', weeks: 'Within 48 hours', body: 'Leave it by the door or hand it over. We bring bags and boxes, and we carry the heavy things down the stairs.' },
+  { title: 'Wipe and sort', weeks: 'The same week', body: 'Every phone and drive is wiped before anything else, and you get a certificate by email. Then each item goes to repair, parts or recycling.' },
+  { title: 'Second life', weeks: 'Within a month', body: 'Working devices go to our refurbished shop. Spare parts go to local repair cafés. What is left goes to certified recyclers, never to landfill.' },
 ]
 
 export default function Process() {
@@ -26,10 +26,9 @@ export default function Process() {
     <section id="process" aria-labelledby="process-title" className="relative bg-plum-950 text-bone px-5 sm:px-8 md:px-10 py-24 sm:py-32 overflow-hidden">
       <div className="grid gap-12 md:grid-cols-[1fr_1.35fr] md:gap-20">
         <div className="md:sticky md:top-28 self-start">
-          <ScrambleText as="h2" id="process-title" text="How we operate" className="display block" style={{ fontSize: 'clamp(34px, 3.8vw, 72px)' }} />
+          <ScrambleText as="h2" id="process-title" text="How it works" className="display block" style={{ fontSize: 'clamp(34px, 3.8vw, 72px)' }} />
           <p className="mt-6 max-w-[36ch] text-[15px] sm:text-[16px] leading-[1.7] text-bone/70">
-            Four steps, the same every time. Most projects take 10 to 16 weeks, and you will always know which week you
-            are in.
+            Four steps, the same for every pickup. You only have to do the first one.
           </p>
         </div>
 

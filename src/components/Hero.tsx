@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react'
 import ScrambleText from './ScrambleText'
 
-export const EMAIL = 'hello@junk.studio'
+export const EMAIL = 'hello@junk.eco'
 
-const QUESTION = 'Now, what are we building?'
+const QUESTION = 'Old tech? We’ll come and get it.'
+const LINE = 'Free e-waste pickup in Rotterdam and Lisbon. Data wiped, nothing sent to landfill.'
 
 /**
  * The opening frame belongs to JUN977, so the words stay few:
- * one question and one way in. Everything else lives further down.
+ * what we do, one line on how, and one way in.
  */
 export default function HeroIntro() {
   const [ready, setReady] = useState(false)
@@ -19,7 +20,7 @@ export default function HeroIntro() {
 
   return (
     <div className="max-w-[30rem]">
-      <h1 className="sr-only">JUNK, a creative studio. {QUESTION}</h1>
+      <h1 className="sr-only">JUNK e-waste pickup. {QUESTION} {LINE}</h1>
 
       <ScrambleText
         text={QUESTION}
@@ -28,6 +29,14 @@ export default function HeroIntro() {
         className="display block"
         style={{ fontSize: 'clamp(26px, 2.6vw, 44px)', fontWeight: 400 }}
       />
+
+      <p
+        aria-hidden="true"
+        className="mt-4 max-w-[40ch] text-[13px] sm:text-[14px] leading-[1.6] text-bone/70"
+        style={{ opacity: ready ? 1 : 0, transition: 'opacity 0.6s ease 0.4s' }}
+      >
+        {LINE}
+      </p>
 
       <button
         type="button"
@@ -39,7 +48,7 @@ export default function HeroIntro() {
           transition: 'opacity 0.5s ease 0.6s, transform 0.5s ease 0.6s, background-color 0.2s',
         }}
       >
-        Pitch us an idea
+        Book a pickup
       </button>
     </div>
   )

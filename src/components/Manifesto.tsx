@@ -4,12 +4,12 @@ import { useInView } from '../hooks/useInView'
 import Reveal from './Reveal'
 
 const STATEMENT =
-  'Good work is mostly salvage. We keep the parts that work, throw out what is truly broken, and weld the rest into something people remember.'
+  'Every home has a drawer like this: a phone that still turns on, a laptop nobody opens, a knot of chargers. We pick it all up and give every part a next life.'
 
 const FACTS = [
-  { value: 26, label: 'people in Rotterdam and Lisbon' },
-  { value: 1, label: 'robot, answering the door' },
-  { value: 9, label: 'clients at a time, never more' },
+  { value: 48, label: 'hours from booking to pickup' },
+  { value: 94, label: 'percent of every device reused or recycled' },
+  { value: 0, label: 'euros for most home pickups' },
 ]
 
 function Counter({ to, run }: { to: number; run: boolean }) {
@@ -63,9 +63,9 @@ export default function Manifesto() {
         <div className="mt-16 sm:mt-24 grid gap-10 md:grid-cols-[1fr_1.2fr] md:gap-16 items-end">
           <Reveal>
             <p className="max-w-[44ch] text-[15px] sm:text-[16px] leading-[1.7] text-bone/75">
-              JUNK is an independent studio for brands, products and the odd machine. We start with what you already
-              have, the name, the habits, the half-finished ideas, and keep one small team with you from the first
-              question to the week after launch.
+              JUNK is an e-waste pickup service in Rotterdam and Lisbon. Book a slot, leave your old electronics by the
+              door, and we take it from there: data wiped, working devices refurbished, everything else taken apart and
+              recycled properly.
             </p>
           </Reveal>
 

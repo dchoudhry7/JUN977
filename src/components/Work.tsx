@@ -1,15 +1,16 @@
 import { useEffect, useRef, useState } from 'react'
 import ScrambleText from './ScrambleText'
 
+/* What we pick up: examples, what happens to it, and what it costs */
 type Project = { name: string; scope: string; sector: string; year: string; line: string; code: string }
 
 const PROJECTS: Project[] = [
-  { name: 'Halden Audio', scope: 'Identity, packaging', sector: 'Hi-fi', year: '2026', code: 'HA-26', line: 'Speakers that look like furniture, and boxes worth keeping.' },
-  { name: 'Northline Rail', scope: 'Wayfinding, signage', sector: 'Transport', year: '2025', code: 'NR-25', line: '212 stations, one arrow, zero exceptions.' },
-  { name: 'Orbit Pay', scope: 'Product design, app', sector: 'Finance', year: '2025', code: 'OP-25', line: 'Split a bill in two taps. We counted.' },
-  { name: 'Kettle & Co.', scope: 'Brand, retail interiors', sector: 'Tea', year: '2024', code: 'KC-24', line: 'Eleven shops that smell the same on purpose.' },
-  { name: 'Moll Ceramics', scope: 'Brand, online store', sector: 'Homeware', year: '2024', code: 'MC-24', line: 'Hand-thrown bowls, sold by a site that loads in 0.8 seconds.' },
-  { name: 'Low Tide Festival', scope: 'Identity, motion', sector: 'Music', year: '2023', code: 'LT-23', line: 'A poster system that rearranges itself with the tide table.' },
+  { name: 'Phones and tablets', scope: 'Any brand, cracked is fine', sector: 'Wiped, then refurbished', year: 'Free', code: 'PH', line: 'Cracked screens welcome. We wipe it before anything else.' },
+  { name: 'Laptops and computers', scope: 'Desktops, towers, Macs', sector: 'Wiped, then refurbished', year: 'Free', code: 'PC', line: 'Drives wiped to a certified standard, or shredded if you ask.' },
+  { name: 'Cables and chargers', scope: 'The whole drawer, tangled', sector: 'Copper recovered', year: 'Free', code: 'CB', line: 'Bring the knot. Untangling it is our job.' },
+  { name: 'Audio and gaming', scope: 'Speakers, consoles, headphones', sector: 'Repaired or parted', year: 'Free', code: 'AV', line: 'Consoles that still boot go to the refurbished shelf.' },
+  { name: 'Batteries and power banks', scope: 'Terminals taped, in a bag', sector: 'Certified recycler', year: 'Free', code: 'BT', line: 'Tape the ends, bag them up, and leave the rest to us.' },
+  { name: 'TVs and monitors', scope: 'Up to 65 inches', sector: 'Panels recycled', year: '€15', code: 'TV', line: 'Two of us carry it down. You hold the door.' },
 ]
 
 export default function Work() {
@@ -58,17 +59,17 @@ export default function Work() {
   const current = active !== null ? PROJECTS[active] : null
 
   return (
-    <section id="studio" aria-labelledby="studio-title" className="relative bg-plum-900 px-5 sm:px-8 md:px-10 pb-24 sm:pb-32">
+    <section id="take" aria-labelledby="take-title" className="relative bg-plum-900 px-5 sm:px-8 md:px-10 pb-24 sm:pb-32">
       <div className="flex flex-wrap items-end justify-between gap-4 border-t-2 border-rust pt-6">
-        <ScrambleText as="h2" id="studio-title" text="Selected work" className="display block" style={{ fontSize: 'clamp(34px, 4vw, 76px)' }} />
-        <p className="font-mono text-[13px] text-bone/60">6 of 41 projects since 2019</p>
+        <ScrambleText as="h2" id="take-title" text="What we take" className="display block" style={{ fontSize: 'clamp(34px, 4vw, 76px)' }} />
+        <p className="font-mono text-[13px] text-bone/60">If it has a plug or a battery, we take it</p>
       </div>
 
       <ul className="mt-8 sm:mt-12" onPointerLeave={() => setActive(null)}>
         {PROJECTS.map((p, i) => (
           <li key={p.name}>
             <a
-              href="#contact"
+              href="#pitch"
               onPointerEnter={(e) => enter(i, e)}
               className={`group relative grid grid-cols-[1fr_auto] md:grid-cols-[2.2fr_1.6fr_1fr_auto] items-baseline gap-x-6 gap-y-1 border-b border-bone/15 py-5 sm:py-6 transition-opacity duration-300 ${
                 active !== null && active !== i ? 'md:opacity-30' : 'opacity-100'

@@ -18,9 +18,9 @@ const saveData = () => Boolean((navigator as Navigator & { connection?: { saveDa
 
 /* Specs around the head, in the footage's 1920x1080 coordinates */
 const STATS = [
-  { x: 1378, y: 333, stat: '2026', label: 'year built' },
-  { x: 1384, y: 499, stat: '64', label: 'LEDs in each eye' },
-  { x: 1322, y: 654, stat: '<1 min', label: 'to read your pitch' },
+  { x: 1378, y: 333, stat: '48 h', label: 'from booking to pickup' },
+  { x: 1384, y: 499, stat: '94%', label: 'reused or recycled' },
+  { x: 1322, y: 654, stat: '0 kg', label: 'sent to landfill' },
 ]
 
 const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v))

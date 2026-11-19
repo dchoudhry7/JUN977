@@ -4,28 +4,29 @@ import ScrambleText from './ScrambleText'
 const SPEC = [
   ['Unit', 'JUN977'],
   ['On duty since', 'June 2026'],
-  ['Made from', '1 intercom, 2 bike lights, 1 mattress spring'],
-  ['Eyes', '2 × 64 amber LEDs'],
-  ['Reads', 'every pitch, in under a minute'],
-  ['Weak spot', 'Monday mornings'],
+  ['Made from', '1 intercom, 2 bike lights, 1 router, 1 mattress spring'],
+  ['Eyes', '2 × 64 amber LEDs from a broken TV'],
+  ['Books', 'a pickup in under a minute'],
+  ['Weak spot', 'Fax machines'],
 ]
 
+/* Where everything we pick up ends up */
 const SIDE_PROJECTS = [
-  { name: 'Kerning by Ear', status: 'Prototype', body: 'A type plugin that spaces letters to a rhythm you hum into the microphone. Mostly a joke. Partly not.' },
-  { name: 'Quiet Hours', status: 'Shelved, for now', body: 'A desk lamp that dims as your calendar fills up, so the room tells you when to stop saying yes.' },
-  { name: 'Spare Parts Library', status: 'Open to clients', body: 'Every rejected logo, typeface and layout from eleven years of projects, sorted and free to borrow.' },
+  { name: 'Refurbished', status: 'Working devices', body: 'Phones and laptops that pass our tests get a new battery, a clean screen and a one-year warranty, then go on sale below.' },
+  { name: 'Repair cafés', status: 'Spare parts', body: 'Screens, keyboards, fans and chargers go to local repair cafés for free, so other people can fix their own.' },
+  { name: 'Recycled', status: 'Everything else', body: 'Metals, glass and plastics go to certified recyclers. We publish where every kilo ends up, every month.' },
 ]
 
 export default function Labs() {
   return (
-    <section id="labs" aria-labelledby="labs-title" className="relative bg-plum-900 overflow-hidden">
-      {/* Labs on the left, the pitch console on the right: one screen, plain plum */}
+    <section id="book" aria-labelledby="book-title" className="relative bg-plum-900 overflow-hidden">
+      {/* JUN977 on the left, the booking console on the right: one screen, plain plum */}
       <div className="grid gap-16 lg:grid-cols-2 lg:gap-12 items-start px-5 sm:px-8 md:px-10 pt-24 sm:pt-32 pb-16">
         <div>
-          <ScrambleText as="h2" id="labs-title" text="Labs" className="display block" style={{ fontSize: 'clamp(44px, 5.5vw, 104px)' }} />
+          <ScrambleText as="h2" id="book-title" text="Meet JUN977" className="display block" style={{ fontSize: 'clamp(38px, 4.4vw, 84px)' }} />
           <p className="mt-5 max-w-[40ch] text-[15px] sm:text-[16px] leading-[1.7] text-bone/75">
-            One day a week, we build things nobody asked for. The best one now runs the front desk, and it is ready for
-            your idea.
+            Our robot is built entirely from things people gave us. Now it books every pickup: tell it what you have,
+            and it tells you what happens next.
           </p>
 
           {/* The spec plate: riveted, stencilled, a little scratched */}
@@ -35,7 +36,7 @@ export default function Labs() {
             ))}
             <div className="flex items-baseline justify-between gap-4">
               <h3 className="font-heading font-normal tracking-[-0.03em] text-[28px] leading-none text-rust">JUN977</h3>
-              <span className="sticker text-[13px]">In daily use</span>
+              <span className="sticker text-[13px]">100% salvaged</span>
             </div>
             <dl className="mt-4 grid grid-cols-[auto_1fr] gap-x-6 gap-y-2 font-mono text-[12.5px] leading-snug">
               {SPEC.map(([k, v]) => (
@@ -54,6 +55,7 @@ export default function Labs() {
       </div>
 
       <div className="px-5 sm:px-8 md:px-10 pb-24 sm:pb-32 pt-8">
+        <h3 className="font-mono text-[13px] text-bone/60 mb-4">Where it all goes</h3>
         <ul className="grid gap-x-10 md:grid-cols-3 border-t-2 border-rust">
           {SIDE_PROJECTS.map((p) => (
             <li key={p.name} className="group py-7 border-b border-bone/12 md:border-b-0">
