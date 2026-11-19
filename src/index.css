@@ -1,0 +1,291 @@
+@import "tailwindcss";
+
+/* ============================================================
+   JUNK, a world sampled from the JUN977 footage
+   ============================================================ */
+@theme {
+  --color-plum-950: #1c141f;  /* deepest corner of the wall */
+  --color-plum-900: #2a1f2e;  /* wall edges */
+  --color-plum-800: #3a2c40;
+  --color-plum-600: #5d4b60;  /* wall behind the head */
+  --color-plum-400: #8a7290;
+  --color-bone: #f6f1ea;      /* warm white: all type, and one paper section */
+  --color-rust: #ff6b1f;      /* signal orange: actions and light only */
+  --color-brick: #b23a2c;     /* shoulder joints */
+  --color-steel: #8d8a92;     /* the box head */
+  --color-glow: #ffc861;      /* the eyes */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-snap: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+:root {
+  --font-heading: 'Martian Mono', ui-monospace, monospace;
+  --font-body: 'IBM Plex Mono', ui-monospace, monospace;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --plum-rgb: 42 31 46;
+  --tshadow: 0 1px 2px rgb(20 12 22 / 0.9), 0 3px 12px rgb(20 12 22 / 0.7), 0 10px 44px rgb(20 12 22 / 0.75);
+
+}
+
+/* Lets --k transition for in-view entrances (the hero writes it from scroll instead) */
+@property --k {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
+
+html {
+  overflow-x: hidden;
+  overflow-x: clip;
+  scroll-behavior: smooth;
+}
+body {
+  font-family: var(--font-body);
+
+  margin: 0;
+  background: var(--color-plum-900);
+  color: var(--color-bone);
+  overflow-x: hidden;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+}
+::selection {
+  background: var(--color-rust);
+  color: var(--color-plum-950);
+}
+
+body.paused *,
+body.paused *::before,
+body.paused *::after {
+  animation-play-state: paused !important;
+}
+
+.font-heading { font-family: var(--font-heading); }
+.font-mono { font-family: var(--font-mono); }
+
+:focus-visible {
+  outline: 2px solid var(--color-rust);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ============================================================
+   Display type: Martian Mono, wide and heavy, set tight.
+   It is JUN977's voice: every character takes the same space,
+   so headings can decode in place without a single reflow.
+   ============================================================ */
+.display {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-stretch: 100%;
+  letter-spacing: -0.035em;
+  line-height: 1.04;
+  color: var(--display, var(--color-bone));
+}
+.display--narrow { font-stretch: 87.5%; letter-spacing: -0.04em; }
+.display--ink { --display: var(--color-plum-950); }
+.display--orange { --display: var(--color-rust); }
+/* Over the footage, a soft dark halo keeps white type readable */
+.band .display { text-shadow: var(--tshadow); }
+/* Glyphs still resolving in a decode: dimmer, in the signal colour */
+.scr { color: var(--color-rust); opacity: 0.85; }
+.scr-wait { opacity: 0; }
+
+
+/* ============================================================
+   The stage: fixed footage behind the journey and the pitch
+   ============================================================ */
+.stage {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 46% 60% at calc(50% + (1 - var(--shift, 0)) * 10%) 40%, rgb(121 96 124 / 0.85) 0%, transparent 70%),
+    radial-gradient(ellipse 80% 90% at 50% 45%, #4a3a50 0%, #2d2131 70%, #231a26 100%);
+}
+/* Footage is 1920x1080 and is never drawn wider than that. Its centre (the
+   robot) sits on --rx, then glides to the middle as --shift goes 0 to 1. */
+.stage-media {
+  --rx: 50vw;
+  --w: min(1920px, 210vw);
+  --h: calc(var(--w) * 9 / 16);
+  position: absolute;
+  top: 56px;
+  left: calc(var(--rx) - var(--w) / 2);
+  width: var(--w);
+  height: var(--h);
+  max-width: none;
+  object-fit: cover;
+  transform: translateZ(0);
+  will-change: transform, opacity;
+  -webkit-mask-image: linear-gradient(to bottom, #000 58%, transparent 92%);
+  mask-image: linear-gradient(to bottom, #000 58%, transparent 92%);
+}
+@media (min-width: 768px) {
+  .stage-media {
+    --rx: 60vw;
+    --w: min(1920px, 118vw);
+    top: max(0px, 100vh - var(--h));
+    transform: translate3d(calc(var(--shift, 0) * -10vw), 0, 0);
+    -webkit-mask-image:
+      linear-gradient(to right, transparent 0%, #000 14%, #000 88%, transparent 100%),
+      linear-gradient(to bottom, transparent 0%, #000 5%, #000 74%, transparent 97%);
+    -webkit-mask-composite: source-in;
+    mask-image:
+      linear-gradient(to right, transparent 0%, #000 14%, #000 88%, transparent 100%),
+      linear-gradient(to bottom, transparent 0%, #000 5%, #000 74%, transparent 97%);
+    mask-composite: intersect;
+  }
+}
+@media (min-width: 768px) and (max-aspect-ratio: 3/2) {
+  .stage-media {
+    --rx: 64vw;
+    transform: translate3d(calc(var(--shift, 0) * -14vw), 0, 0);
+  }
+}
+.stage-still { opacity: 0; transition: opacity 0.9s var(--ease-out-soft); }
+.stage-still.is-on { opacity: 1; }
+.stage-video { opacity: 0; transition: opacity 0.6s ease; }
+.stage-video.is-ready { opacity: 1; }
+/* Keeps the hero copy calm on the left before the robot glides to centre */
+.stage-veil {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 55% 50% at 0% 100%, rgb(var(--plum-rgb) / 0.8) 0%, rgb(var(--plum-rgb) / 0.35) 50%, transparent 78%);
+  opacity: calc(1 - var(--shift, 0));
+}
+@media (max-width: 767px) {
+  .stage-veil { display: none; }
+}
+.stage-dust { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+/* The HUD: thin orbit rings around JUN977's head carrying its specs.
+   It shares the footage's box (via .stage-media), so it stays locked to the
+   head at every size, and it fades as the first band scrolls away. */
+.stage-hud {
+  opacity: var(--hud, 1);
+  color: var(--color-bone);
+  overflow: visible;
+}
+.stage-hud .ring { fill: none; stroke: currentColor; stroke-opacity: 0.16; stroke-width: 1.2; vector-effect: non-scaling-stroke; }
+.stage-hud .ring--hot { stroke: var(--color-rust); stroke-opacity: 0.85; }
+.stage-hud .ring--dash { stroke-dasharray: 2 9; stroke-opacity: 0.3; transform-box: fill-box; transform-origin: center; animation: spin-slow 90s linear infinite; animation-delay: -20s; }
+.stage-hud .node { fill: var(--color-bone); }
+.stage-hud .node--hot { fill: var(--color-rust); }
+.stage-hud text { fill: currentColor; font-family: var(--font-body); }
+.stage-hud .stat { font-family: var(--font-heading); font-weight: 400; font-size: 28px; letter-spacing: -0.03em; }
+.stage-hud .stat-label { font-size: 13px; fill-opacity: 0.6; letter-spacing: 0.02em; }
+.stage-hud text { paint-order: stroke; stroke: rgb(28 20 31 / 0.55); stroke-width: 3px; stroke-linejoin: round; }
+@media (max-width: 767px) {
+  .stage-hud { display: none; }
+}
+
+/* ============================================================
+   The journey: a pinned hero whose bands are paced in scroll
+   ============================================================ */
+.journey { position: relative; z-index: 1; height: 520vh; }
+.journey-pin { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
+.band { position: absolute; opacity: 0; text-shadow: var(--tshadow); }
+.band .pill,
+.band button { text-shadow: none; }
+/* Per-band scrim: dims the footage only behind this band's words */
+.band::before {
+  content: '';
+  position: absolute;
+  inset: -18% -12%;
+  z-index: -1;
+  pointer-events: none;
+  opacity: calc(0.35 + 0.65 * var(--k, 1));
+  background: radial-gradient(ellipse 60% 58% at 50% 50%, rgb(28 20 31 / 0.62) 0%, rgb(28 20 31 / 0.36) 48%, transparent 76%);
+}
+.band-1::before { display: none; }
+
+/* Static hero (phones, portrait tablets, reduced motion): bands in normal flow */
+.journey.is-static { height: auto; }
+.journey.is-static .journey-pin { position: relative; height: auto; overflow: visible; }
+.journey.is-static .band {
+  position: relative;
+  inset: auto !important;
+  opacity: 1 !important;
+  --k: 1 !important;
+  transform: none !important;
+  min-height: 92svh;
+  width: auto !important;
+  translate: none !important;
+  padding-inline: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: 12vh;
+}
+.journey.is-static .band-1 {
+  min-height: 100svh;
+  padding-bottom: 3rem;
+  /* a soft plum floor under the copy, so it never sits on the robot's busy chest */
+  background: linear-gradient(to top, var(--color-plum-900) 0%, rgb(var(--plum-rgb) / 0.92) 38%, transparent 62%);
+}
+/* In flow, the copy sits below the robot on plain backdrop: no scrim needed */
+.journey.is-static .band::before { display: none; }
+
+/* ============================================================
+   Misc motion primitives
+   ============================================================ */
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+.cursor-blink { animation: blink 1s step-end infinite; }
+
+@keyframes spin-slow { to { transform: rotate(360deg); } }
+.spin-slow { animation: spin-slow 24s linear infinite; animation-delay: -6s; }
+
+@keyframes talk { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+.talk { animation: talk 0.32s ease-in-out infinite; }
+
+@keyframes ember { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
+
+.hazard {
+  background-image: repeating-linear-gradient(-45deg, var(--color-rust) 0 14px, var(--color-plum-950) 14px 28px);
+}
+
+/* A sticker, slightly peeled, like the JUN 977 patch on the chest */
+.sticker {
+  display: inline-block;
+  background: var(--color-bone);
+  color: var(--color-brick);
+  padding: 0.25em 0.6em 0.2em;
+  border-radius: 3px;
+  transform: rotate(-2.5deg);
+  box-shadow: 0 1px 0 rgb(0 0 0 / 0.08), 0 6px 14px -8px rgb(0 0 0 / 0.5);
+  clip-path: polygon(0 0, 100% 0, 100% 72%, 88% 100%, 0 100%);
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.8s var(--ease-out-soft), transform 0.8s var(--ease-out-soft);
+}
+.reveal.is-in { opacity: 1; transform: none; }
+
+@media (pointer: coarse) {
+  .pill { min-height: 40px; }
+}
+
+/* ============================================================
+   Reduced motion: final states, nothing moves on its own
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    transition-delay: 0ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+  .enter { --k: 1; }
+
+}
