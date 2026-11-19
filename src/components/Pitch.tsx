@@ -49,7 +49,7 @@ type Phase = 'ask' | 'thinking' | 'reply'
 const caret = 'cursor-blink inline-block w-[2px] h-[1.05em] bg-glow align-middle ml-[2px]'
 
 export default function Pitch() {
-  const { ref: sectionRef, inView } = useInView<HTMLElement>(0.35)
+  const { ref: sectionRef, inView } = useInView<HTMLDivElement>(0.35)
   const [idea, setIdea] = useState('')
   const [submitted, setSubmitted] = useState('')
   const [phase, setPhase] = useState<Phase>('ask')
@@ -99,15 +99,8 @@ export default function Pitch() {
         : 'idle'
 
   return (
-    <section
-      ref={sectionRef}
-      id="pitch"
-      aria-labelledby="pitch-title"
-      className="relative min-h-screen flex items-center justify-center bg-plum-900 px-5 sm:px-8 md:px-10 py-28"
-      style={{ zIndex: 1 }}
-    >
-      <div className="relative w-full max-w-[580px]">
-        <ScrambleText as="h2" id="pitch-title" text="Pitch us an idea" className="display block mb-6" style={{ fontSize: 'clamp(30px, 3.2vw, 58px)' }} />
+    <div ref={sectionRef} id="pitch" aria-labelledby="pitch-title" role="region" className="relative w-full max-w-[580px] scroll-mt-28">
+        <ScrambleText as="h3" id="pitch-title" text="Pitch us an idea" className="display block mb-6" style={{ fontSize: 'clamp(26px, 2.4vw, 42px)' }} />
 
         {/* The console: rust casing, plum screen, input on the ledge */}
         <div className="relative rounded-[24px] bg-rust p-3 sm:p-4 shadow-[0_50px_90px_-40px_rgba(0,0,0,0.8)]">
@@ -204,7 +197,6 @@ export default function Pitch() {
             ))}
           </div>
         )}
-      </div>
-    </section>
+    </div>
   )
 }

@@ -1,5 +1,4 @@
-import { useRef, type CSSProperties } from 'react'
-import { useScrollVar } from '../hooks/useScrollVar'
+import Pitch from './Pitch'
 import ScrambleText from './ScrambleText'
 
 const SPEC = [
@@ -18,16 +17,15 @@ const SIDE_PROJECTS = [
 ]
 
 export default function Labs() {
-  const figRef = useRef<HTMLDivElement>(null)
-  useScrollVar(figRef, '--lp', { start: 1, end: 0 })
-
   return (
     <section id="labs" aria-labelledby="labs-title" className="relative bg-plum-900 overflow-hidden">
-      <div className="relative grid lg:grid-cols-[1fr_1.1fr] items-center">
-        <div className="relative z-[1] px-5 sm:px-8 md:px-10 pt-24 sm:pt-32 lg:py-32">
+      {/* Labs on the left, the pitch console on the right: one screen, plain plum */}
+      <div className="grid gap-16 lg:grid-cols-2 lg:gap-12 items-start px-5 sm:px-8 md:px-10 pt-24 sm:pt-32 pb-16">
+        <div>
           <ScrambleText as="h2" id="labs-title" text="Labs" className="display block" style={{ fontSize: 'clamp(44px, 5.5vw, 104px)' }} />
           <p className="mt-5 max-w-[40ch] text-[15px] sm:text-[16px] leading-[1.7] text-bone/75">
-            One day a week, we build things nobody asked for. The best one now runs the front desk.
+            One day a week, we build things nobody asked for. The best one now runs the front desk, and it is ready for
+            your idea.
           </p>
 
           {/* The spec plate: riveted, stencilled, a little scratched */}
@@ -47,30 +45,15 @@ export default function Labs() {
                 </div>
               ))}
             </dl>
-            <a
-              href="#pitch"
-              className="mt-6 inline-flex items-center rounded-[4px] bg-rust text-plum-950 px-5 py-2.5 text-[15px] font-semibold hover:bg-glow transition-colors duration-200"
-            >
-              Talk to JUN977
-            </a>
           </div>
         </div>
 
-        {/* No frame: the photo melts into the page from a soft oval, like the hero's stage */}
-        <div ref={figRef} className="labs-figure relative h-[70vh] min-h-[420px] lg:h-[100vh]">
-          <img
-            src="/media/jun977-left-2000.webp"
-            srcSet="/media/jun977-left-1200.webp 1200w, /media/jun977-left-2000.webp 2000w, /media/jun977-left-3200.webp 3200w"
-            sizes="(min-width: 1024px) 55vw, 100vw"
-            alt="JUN977, an orange scrap-metal robot with a steel box head and glowing amber eyes, looking left"
-            loading="lazy"
-            className="absolute inset-x-0 -top-[6%] h-[112%] w-full object-cover object-[50%_25%]"
-            style={{ transform: 'translate3d(0, calc((var(--lp, 0.5) - 0.5) * -8%), 0)' } as CSSProperties}
-          />
+        <div className="lg:pt-6 flex lg:justify-end">
+          <Pitch />
         </div>
       </div>
 
-      <div className="px-5 sm:px-8 md:px-10 pb-24 sm:pb-32 pt-6">
+      <div className="px-5 sm:px-8 md:px-10 pb-24 sm:pb-32 pt-8">
         <ul className="grid gap-x-10 md:grid-cols-3 border-t-2 border-rust">
           {SIDE_PROJECTS.map((p) => (
             <li key={p.name} className="group py-7 border-b border-bone/12 md:border-b-0">

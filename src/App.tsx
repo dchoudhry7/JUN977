@@ -5,7 +5,6 @@ import Manifesto from './components/Manifesto'
 import Work from './components/Work'
 import Process from './components/Process'
 import Labs from './components/Labs'
-import Pitch from './components/Pitch'
 import Openings from './components/Openings'
 import Shop from './components/Shop'
 import Footer from './components/Footer'
@@ -31,7 +30,6 @@ export default function App() {
           <Work />
           <Process />
           <Labs />
-          <Pitch />
           <Openings />
           <Shop />
         </div>

@@ -204,12 +204,6 @@ body.paused *::after {
   background: linear-gradient(to top, var(--color-plum-900) 0%, rgb(var(--plum-rgb) / 0.92) 38%, transparent 62%);
 }
 
-/* Labs photo: every edge fades into the plum page, so there is no box */
-.labs-figure {
-  -webkit-mask-image: radial-gradient(ellipse closest-side at 50% 50%, #000 52%, rgb(0 0 0 / 0.6) 76%, transparent 100%);
-  mask-image: radial-gradient(ellipse closest-side at 50% 50%, #000 52%, rgb(0 0 0 / 0.6) 76%, transparent 100%);
-}
-
 /* ============================================================
    Misc motion primitives
    ============================================================ */
