@@ -56,18 +56,17 @@ export default function Labs() {
           </div>
         </div>
 
-        <div ref={figRef} className="relative h-[70vh] min-h-[420px] lg:h-[110vh] overflow-hidden">
+        {/* No frame: the photo melts into the page from a soft oval, like the hero's stage */}
+        <div ref={figRef} className="labs-figure relative h-[70vh] min-h-[420px] lg:h-[100vh]">
           <img
             src="/media/jun977-left-2000.webp"
             srcSet="/media/jun977-left-1200.webp 1200w, /media/jun977-left-2000.webp 2000w, /media/jun977-left-3200.webp 3200w"
             sizes="(min-width: 1024px) 55vw, 100vw"
             alt="JUN977, an orange scrap-metal robot with a steel box head and glowing amber eyes, looking left"
             loading="lazy"
-            className="absolute inset-x-0 -top-[8%] h-[116%] w-full object-cover object-[50%_30%]"
-            style={{ transform: 'translate3d(0, calc((var(--lp, 0.5) - 0.5) * -10%), 0)' } as CSSProperties}
+            className="absolute inset-x-0 -top-[6%] h-[112%] w-full object-cover object-[50%_25%]"
+            style={{ transform: 'translate3d(0, calc((var(--lp, 0.5) - 0.5) * -8%), 0)' } as CSSProperties}
           />
-          <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b lg:bg-gradient-to-r from-plum-900 via-plum-900/0 via-30% to-transparent" />
-          <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-plum-900 to-transparent" />
         </div>
       </div>
 
