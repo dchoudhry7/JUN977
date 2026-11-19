@@ -13,7 +13,7 @@ const FAQ = [
   },
   {
     q: 'Where do you pick up?',
-    a: 'Anywhere in Delhi and Bombay, and the towns around them. Not sure about yours? Put your PIN code in the booking email and we will tell you within a day.',
+    a: 'Wherever you are. JUN977 asks for your city and PIN code when you book, and we confirm a slot within a day. In smaller towns we group pickups, so a slot can be up to a week out.',
   },
   {
     q: 'Do you take broken things?',

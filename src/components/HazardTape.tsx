@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 
-const WORDS = ['Phones', 'Laptops', 'Cables', 'Chargers', 'Free pickup', 'Data wiped', 'Nothing to landfill', 'Delhi', 'Bombay']
+const WORDS = ['Phones', 'Laptops', 'Cables', 'Chargers', 'Free pickup', 'Data wiped', 'Nothing to landfill', 'Any city', 'Any PIN code']
 
 function Track({ dark }: { dark?: boolean }) {
   // Repeated until each track comfortably exceeds a 2560px screen (10k marquee rule)

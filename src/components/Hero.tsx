@@ -4,7 +4,7 @@ import ScrambleText from './ScrambleText'
 export const EMAIL = 'hello@junk.eco'
 
 const QUESTION = 'Old tech? We’ll come and get it.'
-const LINE = 'Free e-waste pickup in Delhi and Bombay. Data wiped, nothing sent to landfill.'
+const LINE = 'Free e-waste pickup, wherever you are. Data wiped, nothing sent to landfill.'
 /* A taste of the list further down; each chip jumps to it */
 const TAKES = ['Phones', 'Laptops', 'Cables', 'Batteries', 'Consoles', 'TVs']
 

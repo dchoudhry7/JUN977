@@ -6,8 +6,8 @@ import { NAV_LINKS } from './Navbar'
 import ScrambleText from './ScrambleText'
 
 const STUDIOS = [
-  { city: 'Delhi', hours: 'Pickups Mon to Sat, 8 to 8' },
-  { city: 'Bombay', hours: 'Pickups Mon to Sat, 9 to 7' },
+  { city: 'Pickups', hours: 'Mon to Sat, 8 am to 8 pm' },
+  { city: 'Where', hours: 'Any city, any PIN code' },
 ]
 
 export default function Footer() {
