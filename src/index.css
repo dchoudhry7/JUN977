@@ -194,6 +194,16 @@ body.paused *::after {
 }
 @media (min-width: 768px) {
   .hero { justify-content: center; }
+  /* The copy stops where JUN977's inner ring begins. The ring's left edge sits
+     at x = 590 of the 1920 footage, so it is --rx - 0.1927 * --w on screen
+     (same numbers as .stage-media). 40px is the side padding, 28px a gap. */
+  .hero-intro > div {
+    --ring-left: calc(60vw - 0.1927 * min(1440px, 88vw));
+    max-width: min(36rem, calc(var(--ring-left) - 40px - 28px));
+  }
+}
+@media (min-width: 768px) and (max-aspect-ratio: 3/2) {
+  .hero-intro > div { --ring-left: calc(62vw - 0.1927 * min(1440px, 96vw)); }
 }
 .hero-intro { text-shadow: var(--tshadow); }
 .hero-intro .display { text-shadow: var(--tshadow); }
