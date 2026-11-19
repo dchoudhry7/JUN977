@@ -113,7 +113,8 @@ body.paused *::after {
      never so big on short landscape phones that the head runs off screen */
   --sw: min(1440px, max(210vw, 100svh), 150svh);
   --sh: calc(var(--sw) * 9 / 16);
-  --stage-top: 44px;
+  /* the footage starts behind the nav, so its top fade happens under the bar, not below it */
+  --stage-top: 0px;
 }
 .stage-media {
   /* the head (x = 990 of 1920) sits on the screen's centre line */
@@ -129,8 +130,9 @@ body.paused *::after {
   object-fit: cover;
   transform: translateZ(0);
   will-change: transform, opacity;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 8%, #000 58%, transparent 92%);
-  mask-image: linear-gradient(to bottom, transparent 0%, #000 8%, #000 58%, transparent 92%);
+  /* stacked: a long, soft top fade (no visible seam) and more of the body kept solid */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / 0.35) 9%, #000 20%, #000 72%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / 0.35) 9%, #000 20%, #000 72%, transparent 100%);
 }
 @media (min-width: 768px) and (orientation: landscape) {
   .stage-media {
@@ -202,16 +204,17 @@ body.paused *::after {
 }
 .hero-intro {
   position: relative;
-  /* the robot's lower body fades between 58% and 92% of its height; the words begin in that fade */
-  padding-top: calc(var(--stage-top) + var(--sh) * 0.66);
-  padding-bottom: 3rem;
+  /* the robot's body stays solid to 72% of its height, then fades; the words begin inside that fade */
+  padding-top: calc(var(--stage-top) + var(--sh) * 0.8);
+  padding-bottom: 2rem;
 }
 /* Stacked: a soft plum floor under the words, so they never sit on the busy chest */
 .hero::before {
   content: '';
   position: absolute;
-  inset: auto 0 0 0;
-  height: calc(100% - var(--stage-top) - var(--sh) * 0.5);
+  /* 2px past the bottom so no sub-pixel seam shows where the next section starts */
+  inset: auto 0 -2px 0;
+  height: calc(100% + 2px - var(--stage-top) - var(--sh) * 0.66);
   pointer-events: none;
   background: linear-gradient(to top, var(--color-plum-900) 0%, rgb(var(--plum-rgb) / 0.85) 55%, transparent 100%);
 }

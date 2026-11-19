@@ -42,7 +42,7 @@ export default function Manifesto() {
 
   return (
     <section id="about" aria-label="About JUNK" className="relative bg-plum-900">
-      <div className="px-5 sm:px-8 md:px-10 pt-24 sm:pt-32 pb-20 sm:pb-28">
+      <div className="px-5 sm:px-8 md:px-10 pt-12 sm:pt-32 pb-20 sm:pb-28">
         {/* Words light up one by one as you scroll through the statement */}
         <p
           ref={textRef}

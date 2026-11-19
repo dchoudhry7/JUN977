@@ -75,7 +75,7 @@ export default function HazardTape() {
   }, [])
 
   return (
-    <div ref={wrap} aria-hidden="true" className="relative h-[180px] sm:h-[220px] overflow-hidden bg-plum-900 select-none">
+    <div ref={wrap} aria-hidden="true" className="relative h-[124px] sm:h-[220px] overflow-hidden bg-plum-900 select-none">
       <div className="absolute left-[-10%] right-[-10%] top-1/2 -translate-y-1/2 rotate-[-4deg]">
         <div className="hazard h-2" />
         <div className="bg-rust py-2 overflow-hidden">
